@@ -14,5 +14,3 @@ class Facultad:
 ing = Facultad("Ingenieria y Tecnologia")
 ing.CrearCarrera("Ingenieria en sistemas")
 print(ing.carreras[0].nombre)
-
-
