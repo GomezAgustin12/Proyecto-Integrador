@@ -1,8 +1,20 @@
 import numpy as np
 import pandas as pd
-from pandas import ExcelWriter
-from pandas import ExcelFile
+
+import Franja 
+Franja=Franja.Franja
+
+class Simulacion:
+    def __init__(self, data):
+        self.excel=pd.read_excel(data)
+
+    
+    def simulacionFranjaDia(self, franja, dia):
+        fran=Franja(franja)
+        
 
 
-#class Simulacion:
- #   def __init__(self, excel):
+
+
+sim= Simulacion("E:\Desktop\Proyecto Integrador\Proyecto-Integrador\Tablas.xlsx")
+
