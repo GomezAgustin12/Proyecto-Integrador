@@ -6,9 +6,10 @@ import Dia
 Dia=Dia.Dia
 
 class Franja:
-    def __init__(self, franja):
+    def __init__(self, franja, dia):
         self.nombre=franja
         self.asignarHorario()
+        self.dia=Dia(dia, franja)
 
     def asignarHorario(self):
         if self.nombre=="Mañana":
@@ -16,12 +17,11 @@ class Franja:
             self.fin=time(12, 30)
         elif self.nombre=="Tarde":
             self.inicio=time(12, 30)
-            self.fin=time(12, 30)
+            self.fin=time(18)
         else:
             self.inicio=time(18)
             self.fin=time(23)
 
 
-    def agregarDia(self, dia, franja):
-        self.dia= Dia(dia, franja)
+
 

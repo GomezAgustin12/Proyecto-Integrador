@@ -1,3 +1,6 @@
+import numpy as np
+import pandas as pd
+
 import Hora
 Hora=Hora.Hora
 

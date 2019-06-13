@@ -10,7 +10,7 @@ class Simulacion:
 
     
     def simulacionFranjaDia(self, franja, dia):
-        fran=Franja(franja)
+        fran=Franja(franja, dia)
         
 
 
