@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+from datetime import datetime, date, time, timedelta
+
 
 import Hora
 Hora=Hora.Hora
@@ -8,7 +10,40 @@ class Dia:
     def __init__(self, nombre, franja):
         self.nombre=nombre
         self.horas=[]
-        self.crearHoras()
+        self.crearHoras(franja)
 
-    def crearHoras(self):
-        self.horas.append(Hora())
+    def crearHoras(self, franja):
+        if franja=="Mañana":
+            self.horas.append(Hora(time(8)))
+            self.horas.append(Hora(time(8, 30)))
+            self.horas.append(Hora(time(9)))
+            self.horas.append(Hora(time(9, 30)))
+            self.horas.append(Hora(time(10)))
+            self.horas.append(Hora(time(10, 30)))
+            self.horas.append(Hora(time(11)))
+            self.horas.append(Hora(time(11, 30)))
+            self.horas.append(Hora(time(12)))
+
+        elif franja=="Tarde":
+            self.horas.append(Hora(time(12, 30)))
+            self.horas.append(Hora(time(13)))
+            self.horas.append(Hora(time(13, 30)))
+            self.horas.append(Hora(time(14)))
+            self.horas.append(Hora(time(14, 30)))
+            self.horas.append(Hora(time(15)))
+            self.horas.append(Hora(time(15, 30)))
+            self.horas.append(Hora(time(16)))
+            self.horas.append(Hora(time(16, 30)))
+            self.horas.append(Hora(time(17)))
+            self.horas.append(Hora(time(17, 30)))
+        else:
+            self.horas.append(Hora(time(18)))
+            self.horas.append(Hora(time(18, 30)))
+            self.horas.append(Hora(time(19)))
+            self.horas.append(Hora(time(19, 30)))
+            self.horas.append(Hora(time(20)))
+            self.horas.append(Hora(time(20, 30)))
+            self.horas.append(Hora(time(21)))
+            self.horas.append(Hora(time(21, 30)))
+            self.horas.append(Hora(time(22)))
+            self.horas.append(Hora(time(22, 30)))
