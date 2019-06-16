@@ -1,4 +1,5 @@
-
+import numpy as np
+import pandas as pd
 
 class Aula:
     def __init__(self, codigo, piso, capacidad, descripcion):

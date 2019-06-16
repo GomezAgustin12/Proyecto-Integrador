@@ -1,54 +1,39 @@
 import numpy as np
 import pandas as pd
-import doctest
+import random
 
-import Aula
-Aula=Aula.Aula
+
 import Franja 
 Franja=Franja.Franja
 import Materias
 Materia= Materias.Materia
 
 class Simulacion:
-    def __init__(self, data):
-        self.excelMateria=pd.read_excel(data, "Materia")
-        self.excelAula=pd.read_excel(data, "Aula")
-        self.aulas=[]
+    def __init__(self):
+        
         self.materias=[]
-        self.crearAulas()
-
     
     def simulacionFranjaDia(self, franja, dia):
         self.fran=Franja(franja, dia)
-        """
-        >>>simulacionFranjaDia("Mañana", "Lunes")
-        """
-
-
+        excelMateria=pd.read_excel("E:\Desktop\Proyecto Integrador\Proyecto-Integrador\Tablas.xlsx", "Materia")
         if franja=="Mañana":
             i=0
-            while self.excelMateria.Año[i]==1:
-                self.materias.append(Materia(self.excelMateria.CodigoMateria[i], self.excelMateria.Facultad[i], self.excelMateria.Carrera[i], self.excelMateria.Nombre[i], self.excelMateria.Año[i], self.excelMateria.Semestre[i], self.excelMateria.CantHs[i], self.excelMateria.CantAlumnos[i]))
+            while excelMateria.Año[i]==1:
+                self.materias.append(Materia(excelMateria.CodigoMateria[i], excelMateria.Facultad[i], excelMateria.Carrera[i], excelMateria.Nombre[i], excelMateria.Año[i], excelMateria.Semestre[i], excelMateria.CantHs[i], excelMateria.CantAlumnos[i]))
                 i=i+1
+
+            for x in self.materias:
+
         elif franja=="Tarde":
             i=0
-            while self.excelMateria.Año[i]==2 and self.excelMateria.Año[i]==4:
-                self.materias.append(Materia(self.excelMateria.CodigoMateria[i], self.excelMateria.Facultad[i], self.excelMateria.Carrera[i], self.excelMateria.Nombre[i], self.excelMateria.Año[i], self.excelMateria.Semestre[i], self.excelMateria.CantHs[i], self.excelMateria.CantAlumnos[i]))
+            while excelMateria.Año[i]==2 and excelMateria.Año[i]==4:
+                self.materias.append(Materia(excelMateria.CodigoMateria[i], excelMateria.Facultad[i], excelMateria.Carrera[i], excelMateria.Nombre[i], excelMateria.Año[i], excelMateria.Semestre[i], excelMateria.CantHs[i], excelMateria.CantAlumnos[i]))
                 i=i+1
         else:
             i=0
-            while self.excelMateria.Año[i]==3 and self.excelMateria.Año[i]==5:
-                self.materias.append(Materia(self.excelMateria.CodigoMateria[i], self.excelMateria.Facultad[i], self.excelMateria.Carrera[i], self.excelMateria.Nombre[i], self.excelMateria.Año[i], self.excelMateria.Semestre[i], self.excelMateria.CantHs[i], self.excelMateria.CantAlumnos[i]))
+            while excelMateria.Año[i]==3 and excelMateria.Año[i]==5:
+                self.materias.append(Materia(excelMateria.CodigoMateria[i], excelMateria.Facultad[i], excelMateria.Carrera[i], excelMateria.Nombre[i], excelMateria.Año[i], excelMateria.Semestre[i], excelMateria.CantHs[i], excelMateria.CantAlumnos[i]))
                 i=i+1
 
-
-    def crearAulas(self):
-        for x in self.excelAula.CodigoAula:
-            self.aulas.append(Aula(self.excelAula.CodigoAula[x], self.excelAula.Piso[x], self.excelAula.Capacidad[x], self.excelAula.Descripcion[x]))
-            
-
-sim= Simulacion("E:\Desktop\Proyecto Integrador\Proyecto-Integrador\Tablas.xlsx")
-
+sim= Simulacion()
 sim.simulacionFranjaDia("Mañana", "Lunes")
-
-
