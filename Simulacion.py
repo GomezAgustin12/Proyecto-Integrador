@@ -3,7 +3,7 @@ from pandas import ExcelWriter
 from pandas import ExcelFile
 import pandas as pd
 import random
-
+from datetime import datetime, date, time, timedelta
 
 import Franja 
 Franja=Franja.Franja
@@ -28,32 +28,13 @@ class Simulacion:
                     i=i+1
 
 
-            tablaMañana = {
-                '8:30':[],
-                '9':[],
-                '9:30':[],
-                '10':[],
-                '10:30':[],
-                '11':[],
-                '11:30':[],
-                '12':[]
-            }
-            i=0
-            """for x in tablaMañana:
-                for y in self.fran.dia.horas[i].aulas:
-                    materiaAleatoria=random.randrange(0, len(self.materias))
-                    tablaMañana[x].append(self.materias[materiaAleatoria].nombre)
-                    self.materias.pop(materiaAleatoria)
-                    if len(self.materias)==0:
-                        break
-                i=i+1"""
-
             materiasTabla=self.materias
             for x in self.materias:
                 aleatorioMateria=random.randrange(0, len(materiasTabla))
                 modulo=self.resolucionHoras(materiasTabla[aleatorioMateria])
                 aleatorioAula=random.randrange(0, len(self.fran.dia.aulas))
                 disponibilidad=self.fran.dia.aulas[aleatorioAula].disponibilidad()
+                self.asignacion(disponibilidad, aleatorioAula)
 
 
 
@@ -87,7 +68,24 @@ class Simulacion:
             modulo1=3
             modulo2=3
         return modulo1
-        
+
+    def asignacion(self, disponibilidad, aleatorioAula):
+        if disponibilidad==time(7, 30):
+            self.fran.dia.aulas[aleatorioAula].hora[0].asignado=True
+            self.fran.dia.aulas[aleatorioAula].hora[1].asignado=True
+            self.fran.dia.aulas[aleatorioAula].hora[2].asignado=True
+            self.fran.dia.aulas[aleatorioAula].hora[3].asignado=True
+        elif disponibilidad==time(9, 30):
+            self.fran.dia.aulas[aleatorioAula].hora[4].asignado=True
+            self.fran.dia.aulas[aleatorioAula].hora[5].asignado=True
+            self.fran.dia.aulas[aleatorioAula].hora[6].asignado=True
+            self.fran.dia.aulas[aleatorioAula].hora[7].asignado=True
+        elif disponibilidad==time(10, 30):
+            self.fran.dia.aulas[aleatorioAula].hora[8].asignado=True
+            self.fran.dia.aulas[aleatorioAula].hora[9].asignado=True
+            self.fran.dia.aulas[aleatorioAula].hora[10].asignado=True
+            self.fran.dia.aulas[aleatorioAula].hora[11].asignado=True
+            self.fran.dia.aulas.pop(aleatorioAula)
 
 sim= Simulacion()
 sim.simulacionFranjaDia("Mañana", "Lunes")
