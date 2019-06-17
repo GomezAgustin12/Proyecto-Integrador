@@ -1,27 +1,13 @@
 import pandas as pd
+from pandas import ExcelWriter
+from pandas import ExcelFile
+import random
+import numpy as np
 
-tablaMañana = {
-    '8:30':["1"],
-    '9':["2"],
-    '9:30':["32"],
-    '10':["4"],
-    '10:30':["5"],
-    '11':["6"],
-    '11:30':["7"],
-    '12':["8"]
-}
+ex=pd.read_excel("E:\Desktop\Proyecto Integrador\Proyecto-Integrador\Tablas-copia.xlsx")
+for x in range(562):
+    ex.CantHs.T[x]=random.randrange(4, 6)
 
-tablaMañana[1].append("Hola")
-print(tablaMañana)
-
-"""
-aulas={
-    'aulas':"aula 23"
-}
-t=pd.DataFrame(tablaMañana)
-a=pd.DataFrame(aulas)
-
-a.radd(t, 0)
-
-print(a)"""
-
+writer = ExcelWriter('E:\Desktop\Proyecto Integrador\Proyecto-Integrador\Tablas-copia.xlsx')
+ex.to_excel(writer,'Materia', index=False)
+writer.save()

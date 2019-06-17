@@ -14,6 +14,7 @@ class Aula:
         self.horas=[]
         self.crearHoras(franja)
         self.aceptaTresModulos=True
+        self.aceptaDosModulos=True
 
     def disponibilidad(self):
         if self.horas[0].asignado==False:
@@ -25,6 +26,7 @@ class Aula:
 
     def crearHoras(self, franja):
         if franja=="Mañana":
+            self.horas.append(Hora(time(7, 30)))
             self.horas.append(Hora(time(8)))
             self.horas.append(Hora(time(8, 30)))
             self.horas.append(Hora(time(9)))
