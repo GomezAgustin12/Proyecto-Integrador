@@ -29,14 +29,16 @@ class Simulacion:
 
 
             materiasTabla=self.materias
+            self.aulasTablas=self.fran.dia.aulas
+
             for x in self.materias:
                 aleatorioMateria=random.randrange(0, len(materiasTabla))
                 modulo=self.resolucionHoras(materiasTabla[aleatorioMateria])
-                aleatorioAula=random.randrange(0, len(self.fran.dia.aulas))
+                aleatorioAula= self.aleatorioAulas(modulo)
                 disponibilidad=self.fran.dia.aulas[aleatorioAula].disponibilidad()
-                self.asignacion(disponibilidad, aleatorioAula)
-
-
+                self.asignacion(disponibilidad, modulo, aleatorioAula)
+                materiasTabla.pop(aleatorioMateria)
+                
 
 
         elif franja=="Tarde":
@@ -69,23 +71,52 @@ class Simulacion:
             modulo2=3
         return modulo1
 
-    def asignacion(self, disponibilidad, aleatorioAula):
-        if disponibilidad==time(7, 30):
-            self.fran.dia.aulas[aleatorioAula].hora[0].asignado=True
-            self.fran.dia.aulas[aleatorioAula].hora[1].asignado=True
-            self.fran.dia.aulas[aleatorioAula].hora[2].asignado=True
-            self.fran.dia.aulas[aleatorioAula].hora[3].asignado=True
-        elif disponibilidad==time(9, 30):
-            self.fran.dia.aulas[aleatorioAula].hora[4].asignado=True
-            self.fran.dia.aulas[aleatorioAula].hora[5].asignado=True
-            self.fran.dia.aulas[aleatorioAula].hora[6].asignado=True
-            self.fran.dia.aulas[aleatorioAula].hora[7].asignado=True
-        elif disponibilidad==time(10, 30):
-            self.fran.dia.aulas[aleatorioAula].hora[8].asignado=True
-            self.fran.dia.aulas[aleatorioAula].hora[9].asignado=True
-            self.fran.dia.aulas[aleatorioAula].hora[10].asignado=True
-            self.fran.dia.aulas[aleatorioAula].hora[11].asignado=True
-            self.fran.dia.aulas.pop(aleatorioAula)
+    def asignacion(self, disponibilidad, modulo, aleatorioAula):
+        if modulo==2:
+            if disponibilidad==time(7, 30):
+                self.fran.dia.aulas[aleatorioAula].hora[0].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[1].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[2].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[3].asignado=True
+            elif disponibilidad==time(9, 30):
+                self.fran.dia.aulas[aleatorioAula].hora[4].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[5].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[6].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[7].asignado=True
+                self.fran.dia.aulas.pop(aleatorioAula)
+                self.aulaDosModulos.pop()
+            elif disponibilidad==time(10, 30):
+                self.fran.dia.aulas[aleatorioAula].hora[8].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[9].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[10].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[11].asignado=True
+                self.fran.dia.aulas.pop(aleatorioAula)
+
+        elif modulo==3:
+
+            if disponibilidad==time(7, 30):
+                self.fran.dia.aulas[aleatorioAula].hora[0].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[1].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[2].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[3].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[4].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[5].asignado=True
+            elif disponibilidad==time(9, 30):
+                self.fran.dia.aulas[aleatorioAula].hora[4].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[5].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[6].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[7].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[8].asignado=True
+                self.fran.dia.aulas[aleatorioAula].hora[9].asignado=True
+                self.fran.dia.aulas.pop(aleatorioAula)
+
+    def aleatorioAulas(self, modulo):
+        if modulo==2:
+            return random.randrange(0, len(self.aulaDosModulos))
+        else:
+            return random.randrange(0, len(self.aulaTresModulos))
+
+                
 
 sim= Simulacion()
 sim.simulacionFranjaDia("Mañana", "Lunes")
