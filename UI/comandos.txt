@@ -1,0 +1,6 @@
+pip install pyqt5
+pip install pyqt5-tools
+
+cd C:\Users\leand\AppData\Local\Programs\Python\Python37-32\Scripts
+
+pyuic5 -x "C:\Users\leand\Desktop\Facultad\SimuladorSADA\UI\ventana.ui" -o "C:\Users\leand\Desktop\Facultad\SimuladorSADA\ventana.py"

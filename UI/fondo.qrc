@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="imagenes">
+    <file>Isotipo-CMYK-300-Color.png</file>
+    <file>fondo.jpg</file>
+    <file>fondo.jpg</file>
+  </qresource>
+</RCC>
