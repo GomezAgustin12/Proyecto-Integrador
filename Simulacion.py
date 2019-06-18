@@ -70,7 +70,7 @@ class Simulacion(object):
         font.setWeight(75)
         self.label.setFont(font)
         self.label.setStyleSheet("background-color: rgb(250,0, 0, 0);\n"
-"color: rgb(255, 255, 255);")
+        "color: rgb(255, 255, 255);")
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(110, 200, 111, 31))
@@ -80,7 +80,7 @@ class Simulacion(object):
         font.setWeight(75)
         self.label_2.setFont(font)
         self.label_2.setStyleSheet("background-color: rgb(250,0, 0, 0);\n"
-"color: rgb(255, 255, 255);")
+        "color: rgb(255, 255, 255);")
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(220, 20, 121, 61))
@@ -88,7 +88,7 @@ class Simulacion(object):
         font.setPointSize(35)
         self.label_3.setFont(font)
         self.label_3.setStyleSheet("color: rgb(255, 255, 255);\n"
-"background-color: rgb(255, 0, 0, 0);")
+        "background-color: rgb(255, 0, 0, 0);")
         self.label_3.setObjectName("label_3")
         self.fondo = QtWidgets.QLabel(self.centralwidget)
         self.fondo.setGeometry(QtCore.QRect(0, 0, 554, 350))
@@ -98,7 +98,7 @@ class Simulacion(object):
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(140, 30, 61, 41))
         self.label_4.setStyleSheet("border-image: url(:/imagenes/Isotipo-CMYK-300-Color.png);\n"
-"background-color: rgb(255, 0, 0, 0);")
+        "background-color: rgb(255, 0, 0, 0);")
         self.label_4.setText("")
         self.label_4.setObjectName("label_4")
         self.fondo.raise_()
@@ -157,7 +157,6 @@ class Simulacion(object):
         df.to_excel(writer,'Salida', index=False)
         writer.save()
         print("Fin")
-
 
 
     def simulacionFranjaDia(self, franja, dia):
