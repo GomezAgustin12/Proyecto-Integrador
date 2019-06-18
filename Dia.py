@@ -12,7 +12,7 @@ class Dia:
         self.crearAulas(franja)
 
     def crearAulas(self, franja):
-        excelAula=pd.read_excel("E:\Desktop\Proyecto Integrador\Proyecto-Integrador\Tablas.xlsx", "Aula")
+        excelAula=pd.read_excel("E:\Desktop\Proyecto Integrador\Proyecto-Integrador\Tabla.xlsx", "Aula")
         for x in excelAula.CodigoAula:
             self.aulas.append(Aula(excelAula.CodigoAula[x], excelAula.Piso[x], excelAula.Capacidad[x], excelAula.Descripcion[x], franja))
     

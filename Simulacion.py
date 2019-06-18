@@ -168,7 +168,7 @@ class Simulacion(object):
         self.materias=[]
         self.materiasNoAsignadasDosModulos=[]
         self.fran=Franja(franja, dia)
-        excelMateria=pd.read_excel("E:\Desktop\Proyecto Integrador\Proyecto-Integrador\Tablas.xlsx", "Materia")
+        excelMateria=pd.read_excel("E:\Desktop\Proyecto Integrador\Proyecto-Integrador\Tabla.xlsx", "Materia")
         if franja=="Mañana":
             i=0
             for m in excelMateria.Año:    
