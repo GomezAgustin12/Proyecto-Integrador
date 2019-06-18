@@ -144,6 +144,9 @@ class Simulacion(object):
         dia = self.dia.currentText()
         sim= Simulacion()
         sim.simulacionFranjaDia(franja,dia)
+
+
+        
         col=["Aulas"]
         tabla=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
         i=0
@@ -152,12 +155,17 @@ class Simulacion(object):
         for x in sim.fran.dia.aulas:
             tabla[i].append(x.descripcion)
             for y in x.horas:
-                tabla[i].append(y.asignado)
+                if y.asignado==False:
+                    tabla[i].append(y.asignado)
+                else:
+                    tabla[i].append(y.materia.nombre)
             i=i+1
         df=pd.DataFrame(tabla, columns=col)
         writer = ExcelWriter('Simulacion.xlsx')
         df.to_excel(writer,'Resultados', index=False)
         writer.save()
+        for u in sim.materiasNoAsignadasTresModulos:
+            print(u.nombre, "\n")
         print("Fin")
 
 
@@ -206,7 +214,7 @@ class Simulacion(object):
                             break
 
                 
-                self.asignacion(disponibilidadHora, modulo, aleatorioAula)
+                self.asignacion(disponibilidadHora, modulo, aleatorioAula, materiasTabla[aleatorioMateria])
                 materiasTabla.pop(aleatorioMateria)
                 
 
@@ -248,7 +256,7 @@ class Simulacion(object):
                             break
 
                 
-                self.asignacion(disponibilidadHora, modulo, aleatorioAula)
+                self.asignacion(disponibilidadHora, modulo, aleatorioAula, materiasTabla[aleatorioMateria])
                 materiasTabla.pop(aleatorioMateria)
         else:
             i=0
@@ -287,7 +295,7 @@ class Simulacion(object):
                             break
 
                 
-                self.asignacion(disponibilidadHora, modulo, aleatorioAula)
+                self.asignacion(disponibilidadHora, modulo, aleatorioAula, materiasTabla[aleatorioMateria])
                 materiasTabla.pop(aleatorioMateria)
     
     def resolucionHoras(self, mt, flag):
@@ -309,43 +317,63 @@ class Simulacion(object):
             modulo2=3
         return modulo1
 
-    def asignacion(self, disponibilidad, modulo, aleatorioAula):
+    def asignacion(self, disponibilidad, modulo, aleatorioAula, materia):
         global aulasDosModulos
         global aulasTresModulos
         if modulo==2:
             if disponibilidad==time(7, 30):
                 self.fran.dia.aulas[aleatorioAula].horas[0].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[0].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[1].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[1].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[2].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[2].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[3].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[3].materia=materia
                 self.fran.dia.aulas[aleatorioAula].aceptaDosModulos=False
                 aulasDosModulos = aulasDosModulos - 1
             elif disponibilidad==time(10, 30):
                 self.fran.dia.aulas[aleatorioAula].horas[6].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[6].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[7].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[7].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[8].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[8].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[9].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[9].materia=materia
                 self.fran.dia.aulas[aleatorioAula].aceptaDosModulos=False
                 aulasDosModulos = aulasDosModulos - 1
         elif modulo==3:
 
             if disponibilidad==time(7, 30):
                 self.fran.dia.aulas[aleatorioAula].horas[0].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[0].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[1].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[1].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[2].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[2].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[3].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[3].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[4].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[4].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[5].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[5].materia=materia
                 self.fran.dia.aulas[aleatorioAula].aceptaTresModulos=False
                 aulasTresModulos = aulasTresModulos - 1
 
             elif disponibilidad==time(9, 30):
                 self.fran.dia.aulas[aleatorioAula].horas[4].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[4].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[5].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[5].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[6].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[6].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[7].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[7].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[8].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[8].materia=materia
                 self.fran.dia.aulas[aleatorioAula].horas[9].asignado=True
+                self.fran.dia.aulas[aleatorioAula].horas[9].materia=materia
                 self.fran.dia.aulas[aleatorioAula].aceptaTresModulos=False
                 self.fran.dia.aulas[aleatorioAula].aceptaDosModulos=False
                 aulasTresModulos = aulasTresModulos - 1
