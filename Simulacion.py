@@ -11,6 +11,8 @@ import pandas as pd
 import random
 from datetime import datetime, date, time, timedelta
 
+from UI import imagenes
+
 import sys
 
 import Franja 
@@ -153,8 +155,8 @@ class Simulacion(object):
                 tabla[i].append(y.asignado)
             i=i+1
         df=pd.DataFrame(tabla, columns=col)
-        writer = ExcelWriter('NuevaTabla.xlsx')
-        df.to_excel(writer,'Salida', index=False)
+        writer = ExcelWriter('Simulacion.xlsx')
+        df.to_excel(writer,'Resultados', index=False)
         writer.save()
         print("Fin")
 
