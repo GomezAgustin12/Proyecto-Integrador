@@ -122,13 +122,12 @@ class Ui_MainWindow(object):
             tabla[i].append(x.descripcion)
             for y in x.horas:
                 tabla[i].append(y.asignado)
-                bandera=1
-            bandera=0
             i=i+1
         df=pd.DataFrame(tabla, columns=col)
-        writer = ExcelWriter('E:\Desktop\Proyecto Integrador\Proyecto-Integrador\Tablas-copia.xlsx')
+        writer = ExcelWriter('NuevaTabla.xlsx')
         df.to_excel(writer,'Salida', index=False)
         writer.save()
+        print("Fin")
 
 
 
@@ -184,14 +183,82 @@ class Ui_MainWindow(object):
 
         elif franja=="Tarde":
             i=0
-            while excelMateria.Año[i]==2 and excelMateria.Año[i]==4:
-                self.materias.append(Materia(excelMateria.CodigoMateria[i], excelMateria.Facultad[i], excelMateria.Carrera[i], excelMateria.Nombre[i], excelMateria.Año[i], excelMateria.Semestre[i], excelMateria.CantHs[i], excelMateria.CantAlumnos[i]))
-                i=i+1
+            for m in excelMateria.Año:    
+                    if excelMateria.Año[i] == 1:
+                        self.materias.append(Materia(excelMateria.CodigoMateria[i], excelMateria.Facultad[i], excelMateria.Carrera[i], excelMateria.Nombre[i], excelMateria.Año[i], excelMateria.Semestre[i], excelMateria.CantHs[i], excelMateria.CantAlumnos[i]))
+                    i=i+1
+
+            materiasTabla=self.materias
+            aulasDosModulos=len(self.fran.dia.aulas)
+            aulasTresModulos=len(self.fran.dia.aulas)
+            flag=True
+            for x in self.materias:
+                aleatorioMateria=random.randrange(0, len(materiasTabla))
+                modulo=self.resolucionHoras(materiasTabla[aleatorioMateria], flag)
+                aleatorioAula= random.randrange(0, len(self.fran.dia.aulas))
+                disponibilidadDosModulos=self.fran.dia.aulas[aleatorioAula].aceptaDosModulos
+                disponibilidadTresModulos=self.fran.dia.aulas[aleatorioAula].aceptaTresModulos
+                disponibilidadHora=self.fran.dia.aulas[aleatorioAula].disponibilidad()
+                if modulo==2:
+                    while disponibilidadDosModulos==False:
+                        aleatorioAula= random.randrange(0, len(self.fran.dia.aulas))
+                        disponibilidadDosModulos=self.fran.dia.aulas[aleatorioAula].aceptaDosModulos
+                        disponibilidadHora=self.fran.dia.aulas[aleatorioAula].disponibilidad()
+                        if aulasDosModulos==0:
+                            self.materiasNoAsignadasDosModulos.append(materiasTabla[aleatorioMateria])
+                            break
+
+                else:
+                    while disponibilidadTresModulos==False:
+                        aleatorioAula= random.randrange(0, len(self.fran.dia.aulas))
+                        disponibilidadTresModulos=self.fran.dia.aulas[aleatorioAula].aceptaTresModulos
+                        disponibilidadHora=self.fran.dia.aulas[aleatorioAula].disponibilidad()
+                        if aulasTresModulos==0:
+                            self.materiasNoAsignadasTresModulos.append(materiasTabla[aleatorioMateria])
+                            break
+
+                
+                self.asignacion(disponibilidadHora, modulo, aleatorioAula)
+                materiasTabla.pop(aleatorioMateria)
         else:
             i=0
-            while excelMateria.Año[i]==3 and excelMateria.Año[i]==5:
-                self.materias.append(Materia(excelMateria.CodigoMateria[i], excelMateria.Facultad[i], excelMateria.Carrera[i], excelMateria.Nombre[i], excelMateria.Año[i], excelMateria.Semestre[i], excelMateria.CantHs[i], excelMateria.CantAlumnos[i]))
-                i=i+1
+            for m in excelMateria.Año:    
+                    if excelMateria.Año[i] == 1:
+                        self.materias.append(Materia(excelMateria.CodigoMateria[i], excelMateria.Facultad[i], excelMateria.Carrera[i], excelMateria.Nombre[i], excelMateria.Año[i], excelMateria.Semestre[i], excelMateria.CantHs[i], excelMateria.CantAlumnos[i]))
+                    i=i+1
+
+            materiasTabla=self.materias
+            aulasDosModulos=len(self.fran.dia.aulas)
+            aulasTresModulos=len(self.fran.dia.aulas)
+            flag=True
+            for x in self.materias:
+                aleatorioMateria=random.randrange(0, len(materiasTabla))
+                modulo=self.resolucionHoras(materiasTabla[aleatorioMateria], flag)
+                aleatorioAula= random.randrange(0, len(self.fran.dia.aulas))
+                disponibilidadDosModulos=self.fran.dia.aulas[aleatorioAula].aceptaDosModulos
+                disponibilidadTresModulos=self.fran.dia.aulas[aleatorioAula].aceptaTresModulos
+                disponibilidadHora=self.fran.dia.aulas[aleatorioAula].disponibilidad()
+                if modulo==2:
+                    while disponibilidadDosModulos==False:
+                        aleatorioAula= random.randrange(0, len(self.fran.dia.aulas))
+                        disponibilidadDosModulos=self.fran.dia.aulas[aleatorioAula].aceptaDosModulos
+                        disponibilidadHora=self.fran.dia.aulas[aleatorioAula].disponibilidad()
+                        if aulasDosModulos==0:
+                            self.materiasNoAsignadasDosModulos.append(materiasTabla[aleatorioMateria])
+                            break
+
+                else:
+                    while disponibilidadTresModulos==False:
+                        aleatorioAula= random.randrange(0, len(self.fran.dia.aulas))
+                        disponibilidadTresModulos=self.fran.dia.aulas[aleatorioAula].aceptaTresModulos
+                        disponibilidadHora=self.fran.dia.aulas[aleatorioAula].disponibilidad()
+                        if aulasTresModulos==0:
+                            self.materiasNoAsignadasTresModulos.append(materiasTabla[aleatorioMateria])
+                            break
+
+                
+                self.asignacion(disponibilidadHora, modulo, aleatorioAula)
+                materiasTabla.pop(aleatorioMateria)
     
     def resolucionHoras(self, mt, flag):
         cantHs=mt.cantHs
