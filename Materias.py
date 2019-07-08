@@ -1,6 +1,5 @@
 class Materia:
-    def __init__(self, codigo, facultad, carrera, nombre, año, semestre, cantHs, cantAlumnos):
-        self.codigo=codigo
+    def __init__(self, facultad, carrera, nombre, año, semestre, cantHs, cantAlumnos):
         self.facultad=facultad
         self.carrera=carrera
         self.nombre=nombre
